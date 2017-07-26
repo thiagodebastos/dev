@@ -1,0 +1,146 @@
+@import "mq";
+@import "fonts";
+
+/* @import "embed"; */
+
+/* Uncomment for full screen (including immersive article main media) */
+/* @import "fullscreen"; */
+
+@import "susy";
+
+/* Variables */
+$colours: (primary: #005689, secondary: #e3c426, secondary-light: #ffe98f);
+
+$font-size: (body: 20px);
+
+/* Interactive Styles */
+
+.element-atom,
+.interactive-atom {
+  background-color: #d7d7d7;
+  margin: 0 !important;
+
+  * {
+    box-sizing: border-box;
+  }
+
+  .body-copy {
+    font-family: 'DS3 Display Sans', sans-serif;
+  }
+
+  p {
+    font-size: 20px;
+    line-height: 1.375em;
+  }
+
+  & .page-header {
+    position: relative;
+    background: url('<%= path %>/assets/industry-super-bg-mob.jpg');
+    background-position: 50% 50%;
+    height: 518px;
+    text-align: center;
+    padding: 0 20px;
+    margin: 0 0 20px 0;
+    background-size: cover;
+    color: white;
+  }
+
+  & .page-title {
+    top: 50%;
+    position: relative;
+    transform: translateY(-50%);
+    font-family: $f-sans-serif-text;
+    font-weight: normal;
+    font-size: 26px;
+    line-height: 1.25em;
+  }
+
+  .scroll-down {
+    position: absolute;
+    bottom: 26px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-decoration: none;
+    color: inherit;
+    img {
+      padding-top: 16px;
+      display: block;
+      margin-left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+
+  .tile {
+    background-color: #e5e5e5;
+    padding: 20px 40px;
+    text-align: center;
+
+    hr {
+      width: 100px;
+      border: 2px solid map-get($colours, secondary);
+    }
+
+    &--title {
+      color: map-get($colours, primary);
+      font-size: 20px;
+      font-family: 'DS5 Display Sans Semibold', sans-serif;
+      p {
+        margin-bottom: 0;
+      }
+    }
+
+    &--stat {
+      font-family: 'DE5 Display Egyptian SemiBold', serif;
+      font-size: 48px;
+      color: map-get($colours, primary);
+      margin-bottom: 0;
+    }
+    &--caption {
+      font-size: .75em;
+    }
+  }
+
+  .donut-chart-1 {
+    .st0 {
+      fill: map-get($colours, secondary-light);
+    }
+    .st1 {
+      fill: map-get($colours, primary);
+    }
+
+    position: relative;
+    &:after {
+      content: '70%';
+      font-size: 32px;
+      font-family: 'DE5 Display Egyptian SemiBold', serif;
+      color: map-get($colours, primary);
+      position: absolute;
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%);
+    }
+  }
+  .donut-chart-2 {
+    .st0 {
+      fill: map-get($colours, secondary-light);
+    }
+    .st1 {
+      fill: map-get($colours, secondary);
+    }
+    .st2 {
+      fill: map-get($colours, primary);
+    }
+  }
+
+  .bar-graph {
+    .st0 {
+      fill: map-get($colours, secondary-light);
+    }
+    .st1 {
+      fill: map-get($colours, primary);
+      stroke: #d7d7d7;
+      stroke-width: .25;
+      stroke-miterlimit: 10;
+    }
+  }
+}
