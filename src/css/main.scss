@@ -6,7 +6,7 @@
 /* Uncomment for full screen (including immersive article main media) */
 /* @import "fullscreen"; */
 
-@import "susy";
+@import 'susy';
 
 /* Variables */
 $colours: (primary: #005689, secondary: #e3c426, secondary-light: #ffe98f);
@@ -19,6 +19,7 @@ $font-size: (body: 20px);
 .interactive-atom {
   background-color: #d7d7d7;
   margin: 0 !important;
+  padding: 8px;
 
   * {
     box-sizing: border-box;
@@ -31,6 +32,7 @@ $font-size: (body: 20px);
   p {
     font-size: 20px;
     line-height: 1.375em;
+    text-align: center;
   }
 
   & .page-header {
@@ -70,10 +72,37 @@ $font-size: (body: 20px);
     }
   }
 
+  section {
+    display: flex;
+    flex-direction: column;
+    p {
+      order: 1;
+    }
+    & .tile {
+      order: 2;
+    }
+  }
+
   .tile {
     background-color: #e5e5e5;
     padding: 20px 40px;
     text-align: center;
+
+    &.right {
+      @media only screen and (min-width: 500px) {
+        width: span(1 of 2);
+      }
+    }
+    &.left {
+      @media only screen and (min-width: 500px) {
+        width: span(1 of 2);
+      }
+    }
+    &.center {
+      @media only screen and (min-width: 500px) {
+        width: span(2 of 2);
+      }
+    }
 
     hr {
       width: 100px;
