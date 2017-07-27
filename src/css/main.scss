@@ -3,12 +3,9 @@
 
 /* @import "embed"; */
 
-
 /* Uncomment for full screen (including immersive article main media) */
 
-
 /* @import "fullscreen"; */
-
 
 /* Grid */
 
@@ -16,7 +13,12 @@
 
 /* @import 'plugins/svg-grid'; */
 
-$susy: ( 'columns': susy-repeat(4), 'gutters': 0.25, 'spread': 'narrow', 'container-spread': 'narrow');
+$susy: (
+  'columns': susy-repeat(4),
+  'gutters': 0.25,
+  'spread': 'narrow',
+  'container-spread': 'narrow'
+);
 
 /* Variables */
 
@@ -38,12 +40,30 @@ $mq: (tablet: 900px);
   }
   p {
     font-size: 20px;
-    line-height: 1.375em;
+    line-height: 1.25em;
     text-align: center;
     margin-top: 0;
   }
-  & .grid {
-    background: susy-svg-grid() no-repeat scroll;
+
+  .row {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: gutter() / 2;
+    div[class^="col"] {
+      padding: gutter() / 2;
+    }
+    .col-1 {
+      flex: 1 1 span(1 of 4);
+    }
+    .col-2 {
+      flex: 1 1 span(2 of 4);
+    }
+    .col-3 {
+      flex: 1 1 span(3 of 4);
+    }
+    .col-4 {
+      flex: 1 1 span(4 of 4);
+    }
   }
   & .page-header {
     position: relative;
@@ -55,7 +75,7 @@ $mq: (tablet: 900px);
     margin: 0 0 20px 0;
     background-size: cover;
     color: white;
-    width: span(12 of 12);
+    width: span(4 of 4);
   }
   & .page-title {
     top: 50%;
@@ -81,7 +101,11 @@ $mq: (tablet: 900px);
     }
   }
   section {
-    margin-bottom: 80px;
+    margin-bottom: gutter() / 2;
+    > p {
+      flex: 1 1 span(4);
+      padding: 0 gutter() / 2;
+    }
     .split {
       @media only screen and (min-width: map-get($mq, tablet)) {
         display: flex;
@@ -89,31 +113,36 @@ $mq: (tablet: 900px);
         flex-wrap: nowrap;
         .copy,
         .tile {
-          width: span(4 of 4);
+          flex: 1 1 span(2 of 4);
+          padding: 0 gutter() / 2;
+        }
+        .tile {
+          padding-top: gutter() / 2;
+          padding-bottom: gutter() / 2;
         }
       }
     }
   }
   .tile {
     background-color: #e5e5e5;
-    padding: 20px 40px;
     text-align: center;
-
     hr {
       width: 100px;
       border: 2px solid map-get($colours, secondary);
+      margin-top: 0;
+      margin-bottom: gutter();
     }
     &--title {
       color: map-get($colours, primary);
-      font-size: 20px;
-      font-family: 'DS5 Display Sans Semibold', sans-serif;
       p {
+        font-family: 'DS5 Display Sans Semibold', sans-serif;
         margin-bottom: 0;
+        font-size: 28px;
       }
     }
     &--stat {
       font-family: 'DE5 Display Egyptian SemiBold', serif;
-      font-size: 48px;
+      font-size: 54px;
       color: map-get($colours, primary);
       margin-bottom: 0;
     }
@@ -129,6 +158,7 @@ $mq: (tablet: 900px);
     position: relative;
     width: 190px;
     margin: 0 auto;
+    margin-bottom: gutter();
   }
   .donut-chart--stat {
     font-size: 48px;
@@ -177,6 +207,7 @@ $mq: (tablet: 900px);
     }
   }
   .bar-graph {
+    margin-bottom: gutter();
     .st0 {
       fill: map-get($colours, secondary-light);
     }
@@ -196,6 +227,7 @@ $mq: (tablet: 900px);
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    padding: gutter() / 2 0;
     .tile--title {
       flex: 1 0 span(4 of 4);
     }
@@ -244,19 +276,27 @@ $mq: (tablet: 900px);
   .pullquote {
     display: flex;
     .image {
-      flex: 0 0 10%;
-      position: relative;
+      padding-right: 10px;
     }
     img {
       width: 50px;
     }
     blockquote {
-      flex: 0 0 80%;
-      font-size: 38px;
+      font-size: 24px;
       font-family: 'DS3 Display Sans', sans-serif;
       font-style: italic;
       position: relative;
-      margin: 0;
+      margin: 0 0;
+      @media only screen and (min-width: map-get($mq, tablet)) {
+        font-size: 38px;
+      }
+    }
+    .cite {
+      margin-top: gutter();
+      display: block;
+      font-style: normal;
+      font-size: .8em;
+      line-height: 1.25em;
     }
   }
 }
