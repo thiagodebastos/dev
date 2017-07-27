@@ -22,7 +22,7 @@ $susy: ( 'columns': susy-repeat(4), 'gutters': 0.25, 'spread': 'narrow', 'contai
 
 $colours: (primary: #005689, secondary: #e3c426, secondary-light: #ffe98f);
 $font-size: (body: 20px);
-
+$mq: (tablet: 900px);
 /* Interactive Styles */
 
 .element-atom,
@@ -40,6 +40,7 @@ $font-size: (body: 20px);
     font-size: 20px;
     line-height: 1.375em;
     text-align: center;
+    margin-top: 0;
   }
   & .grid {
     background: susy-svg-grid() no-repeat scroll;
@@ -80,34 +81,24 @@ $font-size: (body: 20px);
     }
   }
   section {
-    display: flex;
-    flex-direction: column;
-    p {
-      order: 1;
-    }
-    & .tile {
-      order: 2;
+    margin-bottom: 80px;
+    .split {
+      @media only screen and (min-width: map-get($mq, tablet)) {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        .copy,
+        .tile {
+          width: span(4 of 4);
+        }
+      }
     }
   }
   .tile {
     background-color: #e5e5e5;
     padding: 20px 40px;
     text-align: center;
-    &.right {
-      @media only screen and (min-width: 500px) {
-        width: span(2 of 4);
-      }
-    }
-    &.left {
-      @media only screen and (min-width: 500px) {
-        width: span(2 of 4);
-      }
-    }
-    &.center {
-      @media only screen and (min-width: 500px) {
-        width: span(4 of 4);
-      }
-    }
+
     hr {
       width: 100px;
       border: 2px solid map-get($colours, secondary);
@@ -170,6 +161,21 @@ $font-size: (body: 20px);
       fill: map-get($colours, primary);
     }
   }
+  .section-2 {
+    display: flex;
+    flex-direction: column;
+    .copy {
+      order: 0;
+    }
+    .tile {
+      order: 1;
+    }
+    @media only screen and (min-width: map-get($mq, tablet)) {
+      .copy {
+        order: 1;
+      }
+    }
+  }
   .bar-graph {
     .st0 {
       fill: map-get($colours, secondary-light);
@@ -193,8 +199,12 @@ $font-size: (body: 20px);
     .tile--title {
       flex: 1 0 span(4 of 4);
     }
+
     &--item {
-      flex: 1 1 span(2 of 4);
+      margin: 0 auto;
+      @media only screen and (min-width: map-get($mq, tablet)) {
+        flex: 1 1 span(2 of 4);
+      }
       margin-bottom: 40px;
       h3,
       h4 {
@@ -226,6 +236,27 @@ $font-size: (body: 20px);
         margin: 0 auto;
         font-size: 24px;
       }
+    }
+    &--source {
+      flex: 0 1 span(4 of 4);
+    }
+  }
+  .pullquote {
+    display: flex;
+    .image {
+      flex: 0 0 10%;
+      position: relative;
+    }
+    img {
+      width: 50px;
+    }
+    blockquote {
+      flex: 0 0 80%;
+      font-size: 38px;
+      font-family: 'DS3 Display Sans', sans-serif;
+      font-style: italic;
+      position: relative;
+      margin: 0;
     }
   }
 }
