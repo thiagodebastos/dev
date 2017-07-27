@@ -3,14 +3,24 @@
 
 /* @import "embed"; */
 
+
 /* Uncomment for full screen (including immersive article main media) */
+
+
 /* @import "fullscreen"; */
+
+
+/* Grid */
 
 @import 'susy';
 
-/* Variables */
-$colours: (primary: #005689, secondary: #e3c426, secondary-light: #ffe98f);
+/* @import 'plugins/svg-grid'; */
 
+$susy: ( 'columns': susy-repeat(4), 'gutters': 0.25, 'spread': 'narrow', 'container-spread': 'narrow');
+
+/* Variables */
+
+$colours: (primary: #005689, secondary: #e3c426, secondary-light: #ffe98f);
 $font-size: (body: 20px);
 
 /* Interactive Styles */
@@ -19,22 +29,21 @@ $font-size: (body: 20px);
 .interactive-atom {
   background-color: #d7d7d7;
   margin: 0 !important;
-  padding: 8px;
-
+  padding: 0;
   * {
     box-sizing: border-box;
   }
-
   .body-copy {
     font-family: 'DS3 Display Sans', sans-serif;
   }
-
   p {
     font-size: 20px;
     line-height: 1.375em;
     text-align: center;
   }
-
+  & .grid {
+    background: susy-svg-grid() no-repeat scroll;
+  }
   & .page-header {
     position: relative;
     background: url('<%= path %>/assets/industry-super-bg-mob.jpg');
@@ -45,8 +54,8 @@ $font-size: (body: 20px);
     margin: 0 0 20px 0;
     background-size: cover;
     color: white;
+    width: span(12 of 12);
   }
-
   & .page-title {
     top: 50%;
     position: relative;
@@ -56,7 +65,6 @@ $font-size: (body: 20px);
     font-size: 26px;
     line-height: 1.25em;
   }
-
   .scroll-down {
     position: absolute;
     bottom: 26px;
@@ -71,7 +79,6 @@ $font-size: (body: 20px);
       transform: translateX(-50%);
     }
   }
-
   section {
     display: flex;
     flex-direction: column;
@@ -82,33 +89,29 @@ $font-size: (body: 20px);
       order: 2;
     }
   }
-
   .tile {
     background-color: #e5e5e5;
     padding: 20px 40px;
     text-align: center;
-
     &.right {
       @media only screen and (min-width: 500px) {
-        width: span(1 of 2);
+        width: span(2 of 4);
       }
     }
     &.left {
       @media only screen and (min-width: 500px) {
-        width: span(1 of 2);
+        width: span(2 of 4);
       }
     }
     &.center {
       @media only screen and (min-width: 500px) {
-        width: span(2 of 2);
+        width: span(4 of 4);
       }
     }
-
     hr {
       width: 100px;
       border: 2px solid map-get($colours, secondary);
     }
-
     &--title {
       color: map-get($colours, primary);
       font-size: 20px;
@@ -117,7 +120,6 @@ $font-size: (body: 20px);
         margin-bottom: 0;
       }
     }
-
     &--stat {
       font-family: 'DE5 Display Egyptian SemiBold', serif;
       font-size: 48px;
@@ -125,28 +127,36 @@ $font-size: (body: 20px);
       margin-bottom: 0;
     }
     &--caption {
-      font-size: .75em;
+      font-size: 1em;
+      &__small {
+        font-size: .75em;
+      }
     }
   }
-
+  .donut-chart-1,
+  .donut-chart-2 {
+    position: relative;
+    width: 190px;
+    margin: 0 auto;
+  }
+  .donut-chart--stat {
+    font-size: 48px;
+    font-family: 'DE5 Display Egyptian SemiBold', serif;
+    color: map-get($colours, primary);
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%);
+    sup {
+      font-size: 24px;
+    }
+  }
   .donut-chart-1 {
     .st0 {
       fill: map-get($colours, secondary-light);
     }
     .st1 {
       fill: map-get($colours, primary);
-    }
-
-    position: relative;
-    &:after {
-      content: '70%';
-      font-size: 32px;
-      font-family: 'DE5 Display Egyptian SemiBold', serif;
-      color: map-get($colours, primary);
-      position: absolute;
-      top: 45%;
-      left: 50%;
-      transform: translate(-50%);
     }
   }
   .donut-chart-2 {
@@ -160,7 +170,6 @@ $font-size: (body: 20px);
       fill: map-get($colours, primary);
     }
   }
-
   .bar-graph {
     .st0 {
       fill: map-get($colours, secondary-light);
@@ -170,6 +179,53 @@ $font-size: (body: 20px);
       stroke: #d7d7d7;
       stroke-width: .25;
       stroke-miterlimit: 10;
+    }
+    &--title {
+      color: map-get($colours, primary);
+      font-size: 28px;
+      font-family: 'DE5 Display Egyptian SemiBold', serif;
+    }
+  }
+  .poll-grid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    .tile--title {
+      flex: 1 0 span(4 of 4);
+    }
+    &--item {
+      flex: 1 1 span(2 of 4);
+      margin-bottom: 40px;
+      h3,
+      h4 {
+        margin: 0;
+      }
+      h3,
+      h4,
+      sup {
+        color: map-get($colours, primary);
+        font-family: 'DE5 Display Egyptian SemiBold', serif;
+      }
+      h3 {
+        display: inline-block;
+        font-size: 64px;
+      }
+      sup {
+        position: absolute;
+      }
+      h4,
+      sup {
+        font-size: 32px;
+      }
+      h4 {
+        margin-bottom: 16px;
+      }
+      i {
+        display: block;
+        max-width: 330px;
+        margin: 0 auto;
+        font-size: 24px;
+      }
     }
   }
 }

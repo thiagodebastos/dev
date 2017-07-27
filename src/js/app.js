@@ -48,7 +48,7 @@ function animateNumbers(element, val) {
 }
 
 function updateHandler(el, counter) {
-  el.innerHTML = Math.round(counter * 10) / 10;
+  el.innerHTML = Math.floor(counter);
 }
 
 function animateNumberArray(target, stats) {
@@ -83,26 +83,26 @@ function scrollMagicAnimations(externlAnimation) {
       {
         triggerNode: "#stats_00",
         animationTarget: nodeListToArray("#stats_00 .stat-number"),
-        stats: [51.6, 40.2, 43.9]
+        stats: [70]
       },
       {
         triggerNode: "#stats_01",
         animationTarget: nodeListToArray("#stats_01 .stat-number"),
-        stats: [48.9, 43.9, 49.9]
+        stats: [12]
       },
       {
         triggerNode: "#stats_02",
         animationTarget: nodeListToArray("#stats_02 .stat-number"),
-        stats: [37.3, 24.2, 42.2]
+        stats: [10]
       },
       {
         triggerNode: "#stats_03",
         animationTarget: nodeListToArray("#stats_03 .stat-number"),
-        stats: [32.2, 33.5, 41.6]
+        stats: [55, 66, 58, 61]
       }
     ];
 
-    // animateEverything(targets, animateNumberArray);
+    animateEverything(targets, animateNumberArray);
   }
 
   return {
