@@ -105,7 +105,11 @@ $mq: (tablet: 900px);
     > p {
       flex: 1 1 span(4);
       padding: 0 gutter() / 2;
+      @media only screen and (min-width: map-get($mq, tablet)) {
+        text-align: left;
+      }
     }
+
     .split {
       @media only screen and (min-width: map-get($mq, tablet)) {
         display: flex;
@@ -115,6 +119,10 @@ $mq: (tablet: 900px);
         .tile {
           flex: 1 1 span(2 of 4);
           padding: 0 gutter() / 2;
+          > p {
+            text-align: left;
+          }
+          margin-bottom: gutter();
         }
         .tile {
           padding-top: gutter() / 2;
@@ -183,12 +191,45 @@ $mq: (tablet: 900px);
   .donut-chart-2 {
     .st0 {
       fill: map-get($colours, secondary-light);
+      &:hover {
+        opacity: .5;
+      }
     }
     .st1 {
       fill: map-get($colours, secondary);
     }
     .st2 {
       fill: map-get($colours, primary);
+    }
+  }
+  .donut-chart-2:hover + .col-2 .tooltip {
+    opacity: 1;
+  }
+  .tooltip {
+    margin-bottom: gutter();
+    padding-left: gutter();
+    &:nth-child(1) {
+      color: map-get($colours, primary);
+    }
+    &:nth-child(2) {
+      color: darken(map-get($colours, secondary), 20%);
+    }
+    @media only screen and (min-width: map-get($mq, tablet)) {
+      transition: opacity .75s ease-in-out;
+      opacity: 0;
+    }
+    p,
+    h4 {
+      text-align: left;
+      margin: 0;
+      padding: 0;
+    }
+    h4 {
+      margin-bottom: gutter();
+    }
+    p {
+      margin-bottom: gutter() * 2;
+      font-size: 12px;
     }
   }
   .section-2 {
@@ -274,21 +315,25 @@ $mq: (tablet: 900px);
     }
   }
   .pullquote {
+    margin: gutter() * 2 0 0;
     display: flex;
     .image {
       padding-right: 10px;
     }
     img {
-      width: 50px;
+      width: 30px;
+      @media only screen and (min-width: map-get($mq, tablet)) {
+        width: 50px;
+      }
     }
     blockquote {
       font-size: 24px;
       font-family: 'DS3 Display Sans', sans-serif;
       font-style: italic;
       position: relative;
-      margin: 0 0;
+      line-height: 1.25em;
       @media only screen and (min-width: map-get($mq, tablet)) {
-        font-size: 38px;
+        font-size: 32px;
       }
     }
     .cite {
