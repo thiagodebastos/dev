@@ -25,6 +25,8 @@ $susy: (
 $colours: (primary: #005689, secondary: #e3c426, secondary-light: #ffe98f);
 $font-size: (body: 20px);
 $mq: (tablet: 900px);
+$padding: (desktop: 40px);
+
 /* Interactive Styles */
 
 .element-atom,
@@ -35,16 +37,6 @@ $mq: (tablet: 900px);
   * {
     box-sizing: border-box;
   }
-  .body-copy {
-    font-family: 'DS3 Display Sans', sans-serif;
-  }
-  p {
-    font-size: 20px;
-    line-height: 1.25em;
-    text-align: center;
-    margin-top: 0;
-  }
-
   .row {
     display: flex;
     flex-direction: row;
@@ -65,17 +57,23 @@ $mq: (tablet: 900px);
       flex: 1 1 span(4 of 4);
     }
   }
+  .clear {
+    clear: both;
+  }
   & .page-header {
     position: relative;
-    background: url('<%= path %>/assets/industry-super-bg-mob.jpg');
+    background-image: url('<%= path %>/assets/industry-super-bg-mob.jpg');
     background-position: 50% 50%;
+    background-size: cover;
     height: 518px;
     text-align: center;
     padding: 0 20px;
     margin: 0 0 20px 0;
-    background-size: cover;
     color: white;
     width: span(4 of 4);
+    @media only screen and (min-width: map-get($mq, tablet)) {
+      background-image: url('<%= path %>/assets/industry-super-bg-dp.jpg');
+    }
   }
   & .page-title {
     top: 50%;
@@ -101,43 +99,43 @@ $mq: (tablet: 900px);
     }
   }
   section {
-    margin-bottom: gutter() / 2;
+    margin-bottom: gutter();
     > p {
+      font-family: 'DS3 Display Sans', sans-serif;
+      font-size: 20px;
+      line-height: 1.25em;
+      text-align: center;
       flex: 1 1 span(4);
-      padding: 0 gutter() / 2;
+      padding: 0 gutter();
       @media only screen and (min-width: map-get($mq, tablet)) {
         text-align: left;
-      }
-    }
-
-    .split {
-      @media only screen and (min-width: map-get($mq, tablet)) {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        .copy,
-        .tile {
-          flex: 1 1 span(2 of 4);
-          padding: 0 gutter() / 2;
-          > p {
-            text-align: left;
-          }
-          margin-bottom: gutter();
-        }
-        .tile {
-          padding-top: gutter() / 2;
-          padding-bottom: gutter() / 2;
-        }
+        padding-left: 160px;
       }
     }
   }
+
   .tile {
-    background-color: #e5e5e5;
     text-align: center;
+    margin-bottom: 2em;
+    background-color: #e5e5e5;
+    padding: gutter() / 2 gutter();
+    @media (min-width: map-get($mq, tablet)) {
+      &--left {
+        max-width: 50%;
+        float: left;
+        clear: both;
+        margin-right: map-get($padding, desktop);
+      }
+      &--right {
+        max-width: 50%;
+        float: right;
+        clear: both;
+        margin-left: map-get($padding, desktop);
+      }
+    }
     hr {
       width: 100px;
       border: 2px solid map-get($colours, secondary);
-      margin-top: 0;
       margin-bottom: gutter();
     }
     &--title {
@@ -212,12 +210,13 @@ $mq: (tablet: 900px);
       color: map-get($colours, primary);
     }
     &:nth-child(2) {
-      color: darken(map-get($colours, secondary), 20%);
+      color: darken(map-get($colours, secondary), 26%);
     }
-    @media only screen and (min-width: map-get($mq, tablet)) {
+    /*     @media only screen and (min-width: map-get($mq,
+    tablet)) {
       transition: opacity .75s ease-in-out;
       opacity: 0;
-    }
+    } */
     p,
     h4 {
       text-align: left;
@@ -241,7 +240,8 @@ $mq: (tablet: 900px);
     .tile {
       order: 1;
     }
-    @media only screen and (min-width: map-get($mq, tablet)) {
+    @media only screen and (min-width: map-get($mq,
+    tablet)) {
       .copy {
         order: 1;
       }
@@ -272,8 +272,8 @@ $mq: (tablet: 900px);
     .tile--title {
       flex: 1 0 span(4 of 4);
     }
-
     &--item {
+      position: relative;
       margin: 0 auto;
       @media only screen and (min-width: map-get($mq, tablet)) {
         flex: 1 1 span(2 of 4);
@@ -295,6 +295,7 @@ $mq: (tablet: 900px);
       }
       sup {
         position: absolute;
+        top: 0;
       }
       h4,
       sup {
@@ -315,18 +316,19 @@ $mq: (tablet: 900px);
     }
   }
   .pullquote {
-    margin: gutter() * 2 0 0;
-    display: flex;
+    margin: 0 0 gutter() 0;
     .image {
       padding-right: 10px;
     }
     img {
       width: 30px;
+      margin-top: 1em;
       @media only screen and (min-width: map-get($mq, tablet)) {
-        width: 50px;
+        width: 40px;
       }
     }
     blockquote {
+      margin: gutter() / 2;
       font-size: 24px;
       font-family: 'DS3 Display Sans', sans-serif;
       font-style: italic;
