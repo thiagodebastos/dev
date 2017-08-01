@@ -1,4 +1,5 @@
 import TimelineLite from "gsap/TimelineLite";
+import { TweenLite } from "gsap";
 import ScrollToPlugin from "gsap/ScrollToPlugin";
 import ScrollMagic from "scrollmagic";
 
@@ -14,7 +15,14 @@ function Scroller(scrollElement, scrollTarget) {
   });
 }
 
-// Scroller(scrollDownButton, '#content')
+function animateGraph(graphID) {
+  const TL = new TimelineLite();
+
+  const rects = nodeListToArray(`${graphID} rect.fill`);
+  rects.map(rect => {
+    return TL.to(rect, 0.1, { fill: "#005689" });
+  });
+}
 
 //
 // ─── NUMBER INCREASE ANIMATION ──────────────────────────────────────────────────
@@ -57,14 +65,49 @@ function animateNumberArray(target, stats) {
   });
 }
 
+// Tooltip highlighting
+// let highlighted = false;
+// const chart1Primary = document.querySelector(".donut-chart-2 .st2");
+// const chart1Tooltips = document.querySelector(".tile--left .tooltip");
+
+// function highlight(target) {
+//   console.log(target);
+//   target.style.color = highlighted ? "red" : "rebeccapurple";
+// }
+
+// chart1Primary.addEventListener("mouseover", () => highlight(chart1Tooltips));
+// chart1Primary.addEventListener("mouseout", () => (highlighted = false));
+
 //
 // ─── SCROLLMAGIC ────────────────────────────────────────────────────────────────
 //
 
-function scrollMagicAnimations(externlAnimation) {
+function scrollMagicMisc() {
+  const controller = new ScrollMagic.Controller();
+  const scene = new ScrollMagic.Scene({
+    triggerElement: ".pullquote",
+    duration: 250,
+    reverse: false
+  })
+    .on("start", () => TweenMax.to(".pullquote", 1, { autoAlpha: 1 }))
+    .addTo(controller);
+}
+
+function scrollMagicGraphs(externalAnimation, target) {
+  const controller = new ScrollMagic.Controller();
+  const scene = new ScrollMagic.Scene({
+    triggerElement: "#stats_01",
+    duration: 300,
+    reverse: false
+  })
+    .on("start", () => externalAnimation(target))
+    .addTo(controller);
+}
+
+function scrollMagicAnimations(externalAnimation) {
   let targets, controller;
 
-  function animateEverything(thingsToAnimate, externlAnimation) {
+  function animateEverything(thingsToAnimate, externalAnimation) {
     controller = new ScrollMagic.Controller();
     thingsToAnimate.map(target => {
       new ScrollMagic.Scene({
@@ -72,7 +115,7 @@ function scrollMagicAnimations(externlAnimation) {
         reverse: false
       })
         .on("start", function() {
-          return externlAnimation(target.animationTarget, target.stats);
+          return externalAnimation(target.animationTarget, target.stats);
         })
         .addTo(controller);
     });
@@ -91,7 +134,7 @@ function scrollMagicAnimations(externlAnimation) {
         stats: [12]
       },
       {
-        triggerNode: "#stats_02",
+        triggerNode: "#stats_01",
         animationTarget: nodeListToArray("#stats_02 .stat-number"),
         stats: [10]
       },
@@ -118,6 +161,9 @@ function App() {
   scrollDownButton = document.querySelector(".scroll-down");
   Scroller(scrollDownButton, "#content");
   scrollMagicAnimations(animateNumberArray).init;
+  scrollMagicGraphs(animateGraph, "#bar-graph-1");
+  scrollMagicGraphs(animateGraph, "#bar-graph-2");
+  // scrollMagicMisc();
 }
 
 let scrollDownButton;

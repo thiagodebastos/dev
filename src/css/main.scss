@@ -3,9 +3,12 @@
 
 /* @import "embed"; */
 
+
 /* Uncomment for full screen (including immersive article main media) */
 
+
 /* @import "fullscreen"; */
+
 
 /* Grid */
 
@@ -13,19 +16,15 @@
 
 /* @import 'plugins/svg-grid'; */
 
-$susy: (
-  'columns': susy-repeat(4),
-  'gutters': 0.25,
-  'spread': 'narrow',
-  'container-spread': 'narrow'
-);
+$susy: ( 'columns': susy-repeat(4), 'gutters': 0.25, 'spread': 'narrow', 'container-spread': 'narrow');
 
 /* Variables */
 
 $colours: (primary: #005689, secondary: #e3c426, secondary-light: #ffe98f);
 $font-size: (body: 20px);
-$mq: (tablet: 900px);
+$mq: (tablet: 900px, desktop: 1150px);
 $padding: (desktop: 40px);
+$margins: (default: 30px);
 
 /* Interactive Styles */
 
@@ -36,6 +35,9 @@ $padding: (desktop: 40px);
   padding: 0;
   * {
     box-sizing: border-box;
+  }
+  a {
+    text-decoration: underline;
   }
   .row {
     display: flex;
@@ -57,8 +59,14 @@ $padding: (desktop: 40px);
       flex: 1 1 span(4 of 4);
     }
   }
-  .clear {
+  .clear--both {
     clear: both;
+  }
+  .clear--right {
+    clear: right;
+  }
+  .offset--top {
+    padding-top: 1em;
   }
   & .page-header {
     position: relative;
@@ -80,9 +88,14 @@ $padding: (desktop: 40px);
     position: relative;
     transform: translateY(-50%);
     font-family: $f-sans-serif-text;
+    font-size: 24px;
     font-weight: normal;
-    font-size: 26px;
     line-height: 1.25em;
+    @media (min-width: map-get($mq, tablet)) {
+      max-width: 680px;
+      margin: 0 auto;
+      font-size: 32px;
+    }
   }
   .scroll-down {
     position: absolute;
@@ -99,26 +112,32 @@ $padding: (desktop: 40px);
     }
   }
   section {
-    margin-bottom: gutter();
-    > p {
+    padding: gutter() / 2 gutter() 0;
+    >p {
       font-family: 'DS3 Display Sans', sans-serif;
       font-size: 20px;
       line-height: 1.25em;
       text-align: center;
       flex: 1 1 span(4);
+      margin-bottom: 1.75em;
       padding: 0 gutter();
       @media only screen and (min-width: map-get($mq, tablet)) {
         text-align: left;
+        padding-left: 80px;
+        padding-right: 80px;
+      }
+      @media only screen and (min-width: map-get($mq,
+      desktop)) {
         padding-left: 160px;
+        padding-right: 160px;
       }
     }
   }
-
   .tile {
     text-align: center;
     margin-bottom: 2em;
     background-color: #e5e5e5;
-    padding: gutter() / 2 gutter();
+    padding: gutter() / 4 gutter();
     @media (min-width: map-get($mq, tablet)) {
       &--left {
         max-width: 50%;
@@ -143,18 +162,22 @@ $padding: (desktop: 40px);
       p {
         font-family: 'DS5 Display Sans Semibold', sans-serif;
         margin-bottom: 0;
-        font-size: 28px;
+        font-size: 20px;
       }
     }
     &--stat {
       font-family: 'DE5 Display Egyptian SemiBold', serif;
-      font-size: 54px;
+      font-size: 56px;
       color: map-get($colours, primary);
       margin-bottom: 0;
+      margin-top: 0;
     }
     &--caption {
+      font-family: 'DS3 Display Sans', sans-serif;
       font-size: 1em;
+      margin-bottom: gutter() * 2;
       &__small {
+        font-family: 'DS3 Display Sans', sans-serif;
         font-size: .75em;
       }
     }
@@ -171,7 +194,7 @@ $padding: (desktop: 40px);
     font-family: 'DE5 Display Egyptian SemiBold', serif;
     color: map-get($colours, primary);
     position: absolute;
-    top: 35%;
+    top: 32%;
     left: 50%;
     transform: translate(-50%);
     sup {
@@ -200,23 +223,33 @@ $padding: (desktop: 40px);
       fill: map-get($colours, primary);
     }
   }
-  .donut-chart-2:hover + .col-2 .tooltip {
-    opacity: 1;
+  .donut-chart-2 .st2:hover+.col-2 .tooltip {
+    color: red;
   }
   .tooltip {
+    top: 10%;
     margin-bottom: gutter();
     padding-left: gutter();
+    font-family: 'DS3 Display Sans', sans-serif;
+    position: relative;
+    &:before {
+      content: '';
+      width: 12px;
+      height: 12px;
+      position: absolute;
+      top: 2px;
+      left: -6px;
+    }
     &:nth-child(1) {
-      color: map-get($colours, primary);
+      &:before {
+        background-color: map-get($colours, primary);
+      }
     }
     &:nth-child(2) {
-      color: darken(map-get($colours, secondary), 26%);
+      &:before {
+        background-color: darken(map-get($colours, secondary), 10%);
+      }
     }
-    /*     @media only screen and (min-width: map-get($mq,
-    tablet)) {
-      transition: opacity .75s ease-in-out;
-      opacity: 0;
-    } */
     p,
     h4 {
       text-align: left;
@@ -262,6 +295,24 @@ $padding: (desktop: 40px);
       color: map-get($colours, primary);
       font-size: 28px;
       font-family: 'DE5 Display Egyptian SemiBold', serif;
+    }
+  }
+  #bar-graph-1 {
+    & rect {
+      fill: map-get($colours, secondary-light);
+      stroke: #d7d7d7;
+      stroke-miterlimit: 10;
+      stroke-width: 0.25;
+    }
+  }
+  #bar-graph-2 {
+    & rect {
+      width: 35.54px;
+      height: 71.49px;
+      fill: map-get($colours, secondary-light);
+      stroke: #d7d7d7;
+      stroke-miterlimit: 10;
+      stroke-width: 0.25;
     }
   }
   .poll-grid {
@@ -316,7 +367,14 @@ $padding: (desktop: 40px);
     }
   }
   .pullquote {
-    margin: 0 0 gutter() 0;
+    display: flex;
+    @media only screen and (min-width: map-get($mq, tablet)) {
+      margin-right: 80px;
+    }
+    @media only screen and (min-width: map-get($mq,
+    desktop)) {
+      margin-right: 160px;
+    }
     .image {
       padding-right: 10px;
     }
@@ -335,7 +393,7 @@ $padding: (desktop: 40px);
       position: relative;
       line-height: 1.25em;
       @media only screen and (min-width: map-get($mq, tablet)) {
-        font-size: 32px;
+        font-size: 24px;
       }
     }
     .cite {
