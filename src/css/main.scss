@@ -113,8 +113,11 @@ $margins: (default: 30px);
   }
   section {
     padding: gutter() / 2 gutter() 0;
+    &:last-of-type {
+      padding-bottom: gutter();
+    }
     >p {
-      font-family: 'DS3 Display Sans', sans-serif;
+      font-family: $f-sans-serif-text, sans-serif;
       font-size: 20px;
       line-height: 1.25em;
       text-align: center;
@@ -138,6 +141,8 @@ $margins: (default: 30px);
     margin-bottom: 2em;
     background-color: #e5e5e5;
     padding: gutter() / 4 gutter();
+    border: 36px solid black; // border-image: url("<%= path %>/assets/border-image.svg") 50% round;
+    border-image: url("<%= path %>/assets/asset.svg") 48% round;
     @media (min-width: map-get($mq, tablet)) {
       &--left {
         max-width: 50%;
@@ -173,11 +178,11 @@ $margins: (default: 30px);
       margin-top: 0;
     }
     &--caption {
-      font-family: 'DS3 Display Sans', sans-serif;
+      font-family: $f-sans-serif-text, sans-serif;
       font-size: 1em;
       margin-bottom: gutter() * 2;
       &__small {
-        font-family: 'DS3 Display Sans', sans-serif;
+        font-family: $f-sans-serif-text, sans-serif;
         font-size: .75em;
       }
     }
@@ -230,7 +235,7 @@ $margins: (default: 30px);
     top: 10%;
     margin-bottom: gutter();
     padding-left: gutter();
-    font-family: 'DS3 Display Sans', sans-serif;
+    font-family: $f-sans-serif-text, sans-serif;
     position: relative;
     &:before {
       content: '';
@@ -388,7 +393,7 @@ $margins: (default: 30px);
     blockquote {
       margin: gutter() / 2;
       font-size: 24px;
-      font-family: 'DS3 Display Sans', sans-serif;
+      font-family: $f-sans-serif-text, sans-serif;
       font-style: italic;
       position: relative;
       line-height: 1.25em;
