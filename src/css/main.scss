@@ -3,12 +3,9 @@
 
 /* @import "embed"; */
 
-
 /* Uncomment for full screen (including immersive article main media) */
 
-
 /* @import "fullscreen"; */
-
 
 /* Grid */
 
@@ -16,13 +13,18 @@
 
 /* @import 'plugins/svg-grid'; */
 
-$susy: ( 'columns': susy-repeat(4), 'gutters': 0.25, 'spread': 'narrow', 'container-spread': 'narrow');
+$susy: (
+  'columns': susy-repeat(4),
+  'gutters': 0.25,
+  'spread': 'narrow',
+  'container-spread': 'narrow'
+);
 
 /* Variables */
 
 $colours: (primary: #005689, secondary: #e3c426, secondary-light: #ffe98f);
 $font-size: (body: 20px);
-$mq: (tablet: 900px, desktop: 1150px);
+$mq: (mobile: 500px, tablet: 900px, desktop: 1150px);
 $padding: (desktop: 40px);
 $margins: (default: 30px);
 
@@ -42,6 +44,7 @@ $margins: (default: 30px);
   .row {
     display: flex;
     flex-direction: row;
+
     margin-bottom: gutter() / 2;
     div[class^="col"] {
       padding: gutter() / 2;
@@ -116,7 +119,7 @@ $margins: (default: 30px);
     &:last-of-type {
       padding-bottom: gutter();
     }
-    >p {
+    > p {
       font-family: $f-sans-serif-text, sans-serif;
       font-size: 20px;
       line-height: 1.25em;
@@ -143,12 +146,19 @@ $margins: (default: 30px);
     padding: gutter() / 4 gutter();
     border: 36px solid black; // border-image: url("<%= path %>/assets/border-image.svg") 50% round;
     border-image: url("<%= path %>/assets/asset.svg") 48% round;
+
     @media (min-width: map-get($mq, tablet)) {
       &--left {
         max-width: 50%;
         float: left;
         clear: both;
         margin-right: map-get($padding, desktop);
+        // HACK: because on smaller devices, this breaks
+        @media (max-width: map-get($mq, desktop)) {
+          .row {
+            display: block;
+          }
+        }
       }
       &--right {
         max-width: 50%;
@@ -227,9 +237,6 @@ $margins: (default: 30px);
     .st2 {
       fill: map-get($colours, primary);
     }
-  }
-  .donut-chart-2 .st2:hover+.col-2 .tooltip {
-    color: red;
   }
   .tooltip {
     top: 10%;
