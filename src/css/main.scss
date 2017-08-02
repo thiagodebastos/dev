@@ -144,21 +144,20 @@ $margins: (default: 30px);
     margin-bottom: 2em;
     background-color: #e5e5e5;
     padding: gutter() / 4 gutter();
-    border: 36px solid black; // border-image: url("<%= path %>/assets/border-image.svg") 50% round;
+    border: 36px solid #e7e7e7; // border-image: url("<%= path %>/assets/border-image.svg") 50% round;
     border-image: url("<%= path %>/assets/asset.svg") 48% round;
-
+    // HACK: because on smaller devices, this breaks
+    @media (max-width: map-get($mq, desktop)) {
+      &--left .row {
+        display: block;
+      }
+    }
     @media (min-width: map-get($mq, tablet)) {
       &--left {
         max-width: 50%;
         float: left;
         clear: both;
         margin-right: map-get($padding, desktop);
-        // HACK: because on smaller devices, this breaks
-        @media (max-width: map-get($mq, desktop)) {
-          .row {
-            display: block;
-          }
-        }
       }
       &--right {
         max-width: 50%;
@@ -174,18 +173,19 @@ $margins: (default: 30px);
     }
     &--title {
       color: map-get($colours, primary);
+      margin-bottom: 1.25em;
       p {
-        font-family: 'DS5 Display Sans Semibold', sans-serif;
-        margin-bottom: 0;
+        font-family: 'DS5 Display Sans', sans-serif;
         font-size: 20px;
+        font-weight: 600;
+        line-height: 1.25em;
       }
     }
     &--stat {
-      font-family: 'DE5 Display Egyptian SemiBold', serif;
+      font-family: "Guardian Egyptian Web", "Guardian Text Egyptian Web", serif;
       font-size: 56px;
       color: map-get($colours, primary);
-      margin-bottom: 0;
-      margin-top: 0;
+      line-height: 1em;
     }
     &--caption {
       font-family: $f-sans-serif-text, sans-serif;
@@ -205,11 +205,11 @@ $margins: (default: 30px);
     margin-bottom: gutter();
   }
   .donut-chart--stat {
-    font-size: 48px;
-    font-family: 'DE5 Display Egyptian SemiBold', serif;
+    font-size: 46px;
+    font-family: "Guardian Egyptian Web", "Guardian Text Egyptian Web", serif;
     color: map-get($colours, primary);
     position: absolute;
-    top: 32%;
+    top: 28%;
     left: 50%;
     transform: translate(-50%);
     sup {
@@ -306,7 +306,8 @@ $margins: (default: 30px);
     &--title {
       color: map-get($colours, primary);
       font-size: 28px;
-      font-family: 'DE5 Display Egyptian SemiBold', serif;
+      font-family: "Guardian Egyptian Web", "Guardian Text Egyptian Web", serif;
+      line-height: 1.25em;
     }
   }
   #bar-graph-1 {
@@ -350,7 +351,11 @@ $margins: (default: 30px);
       h4,
       sup {
         color: map-get($colours, primary);
-        font-family: 'DE5 Display Egyptian SemiBold', serif;
+        font-family: "Guardian Egyptian Web", "Guardian Text Egyptian Web",
+          serif;
+      }
+      h4 {
+        line-height: 1em;
       }
       h3 {
         display: inline-block;
