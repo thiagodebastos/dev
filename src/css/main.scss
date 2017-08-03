@@ -1,5 +1,6 @@
 @import "mq";
 @import "fonts";
+@include guss-typography-defaults;
 
 /* @import "embed"; */
 
@@ -27,6 +28,12 @@ $font-size: (body: 20px);
 $mq: (mobile: 500px, tablet: 900px, desktop: 1150px);
 $padding: (desktop: 40px);
 $margins: (default: 30px);
+
+/* mixins */
+@mixin fontHeadline {
+  font-family: $f-serif-headline;
+  font-weight: 600;
+}
 
 /* Interactive Styles */
 
@@ -90,7 +97,7 @@ $margins: (default: 30px);
     top: 50%;
     position: relative;
     transform: translateY(-50%);
-    font-family: $f-sans-serif-text;
+    font-family: $f-sans-serif-headline;
     font-size: 24px;
     font-weight: normal;
     line-height: 1.25em;
@@ -120,7 +127,7 @@ $margins: (default: 30px);
       padding-bottom: gutter();
     }
     > p {
-      font-family: $f-sans-serif-text, sans-serif;
+      font-family: $f-sans-serif-headline, sans-serif;
       font-size: 20px;
       line-height: 1.25em;
       text-align: center;
@@ -182,17 +189,17 @@ $margins: (default: 30px);
       }
     }
     &--stat {
-      font-family: "Guardian Egyptian Web", "Guardian Text Egyptian Web", serif;
+      @include fontHeadline;
       font-size: 56px;
       color: map-get($colours, primary);
       line-height: 1em;
     }
     &--caption {
-      font-family: $f-sans-serif-text, sans-serif;
+      @include fontHeadline;
       font-size: 1em;
       margin-bottom: gutter() * 2;
       &__small {
-        font-family: $f-sans-serif-text, sans-serif;
+        @include fontHeadline;
         font-size: .75em;
       }
     }
@@ -206,7 +213,7 @@ $margins: (default: 30px);
   }
   .donut-chart--stat {
     font-size: 46px;
-    font-family: "Guardian Egyptian Web", "Guardian Text Egyptian Web", serif;
+    @include fontHeadline;
     color: map-get($colours, primary);
     position: absolute;
     top: 28%;
@@ -242,7 +249,7 @@ $margins: (default: 30px);
     top: 10%;
     margin-bottom: gutter();
     padding-left: gutter();
-    font-family: $f-sans-serif-text, sans-serif;
+    font-family: $f-sans-serif-headline, sans-serif;
     position: relative;
     &:before {
       content: '';
@@ -306,7 +313,7 @@ $margins: (default: 30px);
     &--title {
       color: map-get($colours, primary);
       font-size: 28px;
-      font-family: "Guardian Egyptian Web", "Guardian Text Egyptian Web", serif;
+      @include fontHeadline;
       line-height: 1.25em;
     }
   }
@@ -351,8 +358,7 @@ $margins: (default: 30px);
       h4,
       sup {
         color: map-get($colours, primary);
-        font-family: "Guardian Egyptian Web", "Guardian Text Egyptian Web",
-          serif;
+        font-family: $f-serif-headline, serif;
       }
       h4 {
         line-height: 1em;
@@ -405,7 +411,7 @@ $margins: (default: 30px);
     blockquote {
       margin: gutter() / 2;
       font-size: 24px;
-      font-family: $f-sans-serif-text, sans-serif;
+      font-family: $f-sans-serif-headline;
       font-style: italic;
       position: relative;
       line-height: 1.25em;
